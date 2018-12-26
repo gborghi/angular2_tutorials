@@ -1,8 +1,1 @@
-<p>The server component</p>
-<input type="text" [(ngModel)]="name">
-<p>Sever with ID {{serverID}} is {{getServerStatus()}} </p>
-<p>{{ name }}</p>
-<button type="button" class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Ciccione</button>
-<p>{{ serverCreationStatus }}</p>
-<input type="text" class="form-control" (input)="onUpdateServerName($event)">
-<p>{{serverName}}</p>
+<p>{{ 'Server' }} with ID {{ serverId }} is {{ getServerStatus() }}</p>
