@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { serverType } from '../app.component'
 
 @Component({
   selector: 'app-servers',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ServersComponent implements OnInit {
-
+  @Output() newserverCreated = new EventEmitter<serverType>();
   allowNewServer = false;
-  serverID: string = 'giovannis-server';
   serverStatus: number = 10;
   serverCreationStatus: string = "no server was created";
   serverName: string = "";
@@ -23,8 +23,6 @@ export class ServersComponent implements OnInit {
     name: "sempronio",
     content: "ti mangerei"
   }];
-  //servers=[1,2,3]
-  text="";
   serverCreated=false;
 
   ngOnInit (){};
@@ -41,11 +39,13 @@ export class ServersComponent implements OnInit {
 
   onCreateServer() {
     this.serverCreated=true;
-    this.servers.push({
+    let newserver : serverType = {
       type: "ciccio",
       name: this.serverName,
       content: "generico"
-    });
+    };
+    this.servers.push(newserver);
+    this.newserverCreated.emit(newserver);
     //console.log(this.servers);
     this.serverCreationStatus = "server was created! "+this.serverName;
   };
