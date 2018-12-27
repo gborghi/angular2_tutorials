@@ -1,8 +1,19 @@
 <p>The server component</p>
 <input type="text" [(ngModel)]="serverName">
-<p>Server with ID {{serverID}} is {{getServerStatus()}} </p>
-<p>{{ name }}</p>
+<p>Server with ID {{serverName}} is {{getServerStatus()}} </p>
+<p>{{ serverName }}</p>
+
 <button type="button" class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Ciccione</button>
-<p>{{ serverCreationStatus }}</p>
-<input type="text" class="form-control" (input)="onUpdateServerName($event)">
-<p>{{serverName}}</p>
+<p *ngIf="serverCreated; else noServer">{{ serverCreationStatus }}</p>
+<ng-template #noServer>
+  <p>
+    Nessun server creato
+  </p>
+</ng-template>
+<input type="text" class="form-control" (keydown)="$event.keyCode === 37 ? onUpdateServerName($event) : pass">
+
+<!--
+<app-server [parameter]="servers[0].name"></app-server>
+<app-server [parameter]="servers[1].name"></app-server>
+-->
+  <app-server *ngFor="let server of servers" [element]="server">{{ server }}</app-server>

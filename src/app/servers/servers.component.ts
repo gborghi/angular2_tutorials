@@ -13,8 +13,19 @@ export class ServersComponent implements OnInit {
   serverStatus: number = 10;
   serverCreationStatus: string = "no server was created";
   serverName: string = "";
-  servers=[];
+  servers=[{
+    type: "ciccio",
+    name: "caio",
+    content: "mi stuzzichi"
+  },
+  {
+    type: "cesare",
+    name: "sempronio",
+    content: "ti mangerei"
+  }];
+  //servers=[1,2,3]
   text="";
+  serverCreated=false;
 
   ngOnInit (){};
 
@@ -29,13 +40,17 @@ export class ServersComponent implements OnInit {
   };
 
   onCreateServer() {
-    this.serverCreationStatus = "server was created!";
-    this.text = this.serverID;
+    this.serverCreated=true;
+    this.servers.push({
+      type: "ciccio",
+      name: this.serverName,
+      content: "generico"
+    });
+    //console.log(this.servers);
+    this.serverCreationStatus = "server was created! "+this.serverName;
   };
 
   onUpdateServerName(event: any){
-    console.log(event);
     this.serverName = event.target.value;
-    this.text=this.serverName;
   }
 }
