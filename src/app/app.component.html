@@ -7,7 +7,7 @@
 </div>
 <div>
   <p>casot</p>
-  <p *ngFor="let server of serverdata">{{ server.name }}</p>
+  <p *ngFor="let server of serverdata">Server di tipo {{server.type}} con nome {{ server.name }} e contenuto {{ server.content }}</p>
 </div>
 <div>
   <app-servers (newserverCreated)="onNewServer($event)"></app-servers>

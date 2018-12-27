@@ -1,9 +1,11 @@
 <p>The server component</p>
 <input type="text" [(ngModel)]="serverName">
+<input type="text" #servercontent>
+<input type="text" #servertype>
 <p>Server with ID {{serverName}} is {{getServerStatus()}} </p>
 <p>{{ serverName }}</p>
 
-<button type="button" class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Ciccione</button>
+<button type="button" class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer(servercontent)">Ciccione</button>
 <p *ngIf="serverCreated; else noServer">{{ serverCreationStatus }}</p>
 <ng-template #noServer>
   <p>

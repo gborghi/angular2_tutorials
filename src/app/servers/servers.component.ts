@@ -1,9 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { serverType } from '../app.component'
 
 @Component({
   selector: 'app-servers',
   templateUrl: './servers.component.html',
+  encapsulation: ViewEncapsulation.None,
   //styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
 
@@ -13,17 +14,9 @@ export class ServersComponent implements OnInit {
   serverStatus: number = 10;
   serverCreationStatus: string = "no server was created";
   serverName: string = "";
-  servers=[{
-    type: "ciccio",
-    name: "caio",
-    content: "mi stuzzichi"
-  },
-  {
-    type: "cesare",
-    name: "sempronio",
-    content: "ti mangerei"
-  }];
+  servers : serverType[]=[];
   serverCreated=false;
+  @ViewChild('servertype') whichtype;
 
   ngOnInit (){};
 
@@ -37,12 +30,12 @@ export class ServersComponent implements OnInit {
     return this.serverStatus;
   };
 
-  onCreateServer() {
+  onCreateServer(inputTag : HTMLInputElement) {
     this.serverCreated=true;
     let newserver : serverType = {
-      type: "ciccio",
+      type: this.whichtype.nativeElement.value,
       name: this.serverName,
-      content: "generico"
+      content: inputTag.value,
     };
     this.servers.push(newserver);
     this.newserverCreated.emit(newserver);
