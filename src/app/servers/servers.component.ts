@@ -1,7 +1,7 @@
 import { Inject, Component, OnInit, ViewChild, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { serverType } from '../account.service';
-import {LoggingService} from '../logging.service';
-import {AccountService} from '../account.service';
+import { LoggingService } from '../logging.service';
+import { AccountService } from '../account.service';
 //import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
 
 @Component({
@@ -13,21 +13,30 @@ import {AccountService} from '../account.service';
 })
 
 export class ServersComponent implements OnInit {
-  @Output() newserverCreated = new EventEmitter<serverType[]>();
+  @Output() serverChanged = new EventEmitter<serverType[]>();
   allowNewServer = false;
   serverNumber: number = 10;
   serverCreationStatus: string = "no server was created";
   serverName: string = "";
   serverCreated=false;
   @ViewChild('servertype') whichtype;
+  localservers : serverType[];
 
   ngOnInit (){};
 
-  constructor (@Inject(AccountService) private accountService, private loggingService : LoggingService){
+  constructor (private accountService : AccountService, private loggingService : LoggingService){
     setTimeout (() => {
       this.allowNewServer = true;
     }, 3000)
   };
+
+  getfake(){
+    return [{
+      type: 'pistol',
+      name: 'pistol',
+      content: 'pistol',
+    }]
+  }
 
   getServerNumber() {
     return this.serverNumber;
@@ -35,6 +44,8 @@ export class ServersComponent implements OnInit {
 
   onDeleteServer(){
     this.accountService.deleteServer();
+    this.serverChanged.emit(this.accountService.getServers());
+    this.localservers = this.accountService.getServers();
   }
 
   onCreateServer(inputTag : HTMLInputElement) {
@@ -44,9 +55,10 @@ export class ServersComponent implements OnInit {
       name: this.serverName,
       content: inputTag.value,
     };
-//    this.servers.push(newserver);
     this.accountService.addServer(newserver);
-    this.newserverCreated.emit(this.accountService.updateEvent());
+    this.serverChanged.emit(this.accountService.getServers());
+    this.localservers = this.accountService.getServers();
+
     this.serverNumber = Math.random()*1000;
     this.serverCreationStatus = "server was created! "+this.serverName;
     this.loggingService.logStatusChanged("new server created!!")

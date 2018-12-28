@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 export interface serverType {
   type: string;
@@ -6,11 +6,10 @@ export interface serverType {
   content: string
 }
 
-@Injectable()
 export class AccountService {
-  public serverchanged = new EventEmitter<serverType[]>();
-  private allservers: serverType[];
+  private allservers: serverType[]=[];
   constructor() {
+    this.allservers = [{name:'cico', type:'bull', content: 'strip'}];
   }
 
   addServer(newserver: serverType){
@@ -19,11 +18,7 @@ export class AccountService {
   deleteServer(){
     this.allservers.pop();
   }
-  getServers(){
+  getServers(): serverType[] {
     return this.allservers;
   }
-  updateEvent(){
-    this.serverchanged.emit(this.getServers());
-  }
-
 }

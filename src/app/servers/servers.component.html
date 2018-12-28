@@ -19,7 +19,7 @@
 <app-server [parameter]="servers[0].name"></app-server>
 <app-server [parameter]="servers[1].name"></app-server>
 -->
-<ng-template ngFor let-server [ngForOf]="servers">
+<ng-template ngFor let-server [ngForOf]="localservers">
   <app-server *appUnless="server.name.length > 5" [element]="server" [servernumber]="serverNumber">
     You broke {{server.type}} balls with
     <p #pistick></p> strength.

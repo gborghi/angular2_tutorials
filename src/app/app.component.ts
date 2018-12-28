@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { serverType } from './account.service';
 
 @Component({
@@ -7,14 +7,17 @@ import { serverType } from './account.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnChanges {
 
   title : string = 'giovannis-app';
   serverdata : serverType[] = [];
 
   ngOnInit(){};
+  ngOnChanges(){
 
-  onNewServer(newserverdata : serverType[]){
+  }
+
+  onServersChange(newserverdata : serverType[]){
     this.serverdata=newserverdata;
   }
 

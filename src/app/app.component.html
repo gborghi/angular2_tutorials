@@ -10,7 +10,7 @@
   <p *ngFor="let server of serverdata">Server di tipo {{server.type}} con nome {{ server.name }} e contenuto {{ server.content }}</p>
 </div>
 <div>
-  <app-servers (newserverCreated)="onNewServer($event)"></app-servers>
+  <app-servers (serverChanged)="onServersChange($event)"></app-servers>
 </div>
 
 <router-outlet></router-outlet>
