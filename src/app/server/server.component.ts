@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-server',
@@ -10,17 +10,22 @@ import { Component, OnInit, Input } from '@angular/core';
   `]
 })
 
-export class ServerComponent implements OnInit {
+export class ServerComponent implements OnInit, AfterViewInit {
   @Input() element: {type: string, name: string, content: string};
   //@Input() element: string;
-  @Input() parameter: string;
+  @Input() servernumber: number;
+  @ContentChild('pistick') paragraph;
   temp: string = "";
 
   serverId: number = 10;
   serverStatus: string = 'offline';
 
   ngOnInit (){
-    console.log(this.element);
+    //console.log(this.paragraph.nativeElement.html);
+  };
+
+  ngAfterViewInit (){
+    this.paragraph.nativeElement.textContent=this.servernumber;
   };
 
   constructor(){

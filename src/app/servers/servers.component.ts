@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
-import { serverType } from '../app.component'
+import { serverType } from '../app.component';
+//import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
 
 @Component({
   selector: 'app-servers',
@@ -30,6 +31,11 @@ export class ServersComponent implements OnInit {
     return this.serverStatus;
   };
 
+  onDeleteServer(){
+    this.servers.pop();
+    console.log(this.servers);
+  }
+
   onCreateServer(inputTag : HTMLInputElement) {
     this.serverCreated=true;
     let newserver : serverType = {
@@ -39,7 +45,7 @@ export class ServersComponent implements OnInit {
     };
     this.servers.push(newserver);
     this.newserverCreated.emit(newserver);
-    //console.log(this.servers);
+    this.serverStatus = Math.random()*1000;
     this.serverCreationStatus = "server was created! "+this.serverName;
   };
 
