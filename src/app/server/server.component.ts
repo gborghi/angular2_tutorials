@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, ContentChild } from '@angular/core';
+import { serverType } from '../account.service';
 
 @Component({
   selector: 'app-server',
@@ -11,7 +12,7 @@ import { Component, OnInit, Input, AfterViewInit, ContentChild } from '@angular/
 })
 
 export class ServerComponent implements OnInit, AfterViewInit {
-  @Input() element: {type: string, name: string, content: string};
+  @Input() element: serverType;
   //@Input() element: string;
   @Input() servernumber: number;
   @ContentChild('pistick') paragraph;

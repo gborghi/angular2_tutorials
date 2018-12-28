@@ -1,8 +1,8 @@
 <p>The server component</p>
 <input type="text" [(ngModel)]="serverName">
 <input type="text" #servercontent>
-<input appBetterHighlight type="text" #servertype>
-<p appBasicHighlight >Server with ID {{serverName}} is {{getServerStatus()}} </p>
+<input [appBetterHighlight]="'yellow'" type="text" #servertype>
+<p appBasicHighlight >Server with ID {{serverName}} is {{getServerNumber()}} </p>
 <p>{{ serverName }}</p>
 
 <button type="button" class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer(servercontent)">Ciccione</button>
@@ -19,7 +19,9 @@
 <app-server [parameter]="servers[0].name"></app-server>
 <app-server [parameter]="servers[1].name"></app-server>
 -->
-<app-server *ngFor="let server of servers" [element]="server" [servernumber]="serverStatus">
-  You broke {{server.type}} balls with
-  <p #pistick></p> strength.
-</app-server>
+<ng-template ngFor let-server [ngForOf]="servers">
+  <app-server *appUnless="server.name.length > 5" [element]="server" [servernumber]="serverNumber">
+    You broke {{server.type}} balls with
+    <p #pistick></p> strength.
+  </app-server>
+</ng-template>

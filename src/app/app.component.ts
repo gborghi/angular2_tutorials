@@ -1,10 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
-export interface serverType {
-  type: string;
-  name: string;
-  content: string
-}
+import { Component, OnInit } from '@angular/core';
+import { serverType } from './account.service';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +14,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){};
 
-  onNewServer(newserver : serverType){
-    this.serverdata.push(newserver);
+  onNewServer(newserverdata : serverType[]){
+    this.serverdata=newserverdata;
   }
 
   listServers() {

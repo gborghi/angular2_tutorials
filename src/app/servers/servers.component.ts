@@ -1,39 +1,40 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
-import { serverType } from '../app.component';
+import { Inject, Component, OnInit, ViewChild, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { serverType } from '../account.service';
+import {LoggingService} from '../logging.service';
+import {AccountService} from '../account.service';
 //import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
 
 @Component({
   selector: 'app-servers',
   templateUrl: './servers.component.html',
   encapsulation: ViewEncapsulation.None,
-  //styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
+  styles: ['.nopen {display: none}'],
+  providers: [LoggingService, AccountService],
 })
 
 export class ServersComponent implements OnInit {
-  @Output() newserverCreated = new EventEmitter<serverType>();
+  @Output() newserverCreated = new EventEmitter<serverType[]>();
   allowNewServer = false;
-  serverStatus: number = 10;
+  serverNumber: number = 10;
   serverCreationStatus: string = "no server was created";
   serverName: string = "";
-  servers : serverType[]=[];
   serverCreated=false;
   @ViewChild('servertype') whichtype;
 
   ngOnInit (){};
 
-  constructor (){
+  constructor (@Inject(AccountService) private accountService, private loggingService : LoggingService){
     setTimeout (() => {
       this.allowNewServer = true;
     }, 3000)
   };
 
-  getServerStatus() {
-    return this.serverStatus;
+  getServerNumber() {
+    return this.serverNumber;
   };
 
   onDeleteServer(){
-    this.servers.pop();
-    console.log(this.servers);
+    this.accountService.deleteServer();
   }
 
   onCreateServer(inputTag : HTMLInputElement) {
@@ -43,10 +44,12 @@ export class ServersComponent implements OnInit {
       name: this.serverName,
       content: inputTag.value,
     };
-    this.servers.push(newserver);
-    this.newserverCreated.emit(newserver);
-    this.serverStatus = Math.random()*1000;
+//    this.servers.push(newserver);
+    this.accountService.addServer(newserver);
+    this.newserverCreated.emit(this.accountService.updateEvent());
+    this.serverNumber = Math.random()*1000;
     this.serverCreationStatus = "server was created! "+this.serverName;
+    this.loggingService.logStatusChanged("new server created!!")
   };
 
   onUpdateServerName(event: any){
