@@ -35,7 +35,7 @@ export class ServersComponent implements OnInit {
 
   updateServers(){
 //    this.localservers = this.accountService.getServers();
-//    this.serverChanged.emit(this.accountService.getServers());
+    this.serverChanged.emit();
 //    console.log(this.localservers.length);
   }
 

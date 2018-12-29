@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { LoggingService } from '../logging/logging.service';
 
 export interface serverType {
@@ -7,9 +7,11 @@ export interface serverType {
   content: string
 }
 
-@Injectable() 
+@Injectable()
 export class AccountService {
   private allservers: serverType[]=[];
+  mycheck = new EventEmitter<string>();
+
   constructor(private logservice : LoggingService) {
     this.allservers = [{name:'cicozz', type:'bull', content: 'strip'}];
   }
@@ -19,8 +21,9 @@ export class AccountService {
     this.logservice.logStatusChanged("new server was added");
   }
   deleteServer(){
-    this.allservers.pop();
+    let temp = this.allservers.pop();
     this.logservice.logStatusChanged("server was deleted");
+    this.mycheck.emit(temp.name);
   }
   getServers(): serverType[] {
     return this.allservers;

@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div style="text-align:center" [ngClass]='{nopen: notopen}' #appcomponent>
   <h1>
     Welcome to THIS: {{ title }}!
   </h1>
@@ -10,7 +10,7 @@
   <p *ngFor="let server of serverdata">Server di tipo {{server.type}} con nome {{ server.name }} e contenuto {{ server.content }}</p>
 </div>
 <div>
-  <app-servers (serverChanged)="onServersChange($event)"></app-servers>
+  <app-servers (serverChanged)="onServersChange()"></app-servers>
 </div>
 
 <router-outlet></router-outlet>
