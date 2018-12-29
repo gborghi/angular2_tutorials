@@ -12,7 +12,7 @@ import { UnlessDirective } from './directives/unless/unless.directive';
 import { AccountService } from './services/account/account.service';
 import { LoggingService } from './services/logging/logging.service';
 import { Routes, RouterModule } from '@angular/router';
-import { PicturesComponent } from './pictures/pictures.component';
+import { PicturesComponent } from './components/pictures/pictures.component';
 
 const appRoutes : Routes = [
   { path: 'pictures', component: PicturesComponent },
@@ -39,4 +39,5 @@ const appRoutes : Routes = [
   providers: [AccountService, LoggingService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
