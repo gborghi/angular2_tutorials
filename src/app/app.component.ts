@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { serverType } from './account.service';
+import { serverType, AccountService } from './services/account/account.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +10,17 @@ import { serverType } from './account.service';
 export class AppComponent implements OnInit, OnChanges {
 
   title : string = 'giovannis-app';
-  serverdata : serverType[] = [];
+  serverdata : serverType[];
 
-  ngOnInit(){};
-  ngOnChanges(){
+  constructor(private accountService: AccountService){};
+  ngOnInit(){
+    this.serverdata = this.accountService.getServers();
+  };
 
-  }
+  ngOnChanges(){};
 
   onServersChange(newserverdata : serverType[]){
-    this.serverdata=newserverdata;
+    //this.serverdata=newserverdata;
   }
 
   listServers() {

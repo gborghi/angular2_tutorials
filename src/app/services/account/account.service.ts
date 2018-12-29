@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoggingService } from '../logging/logging.service';
 
 export interface serverType {
   type: string;
@@ -6,17 +7,20 @@ export interface serverType {
   content: string
 }
 
+@Injectable() 
 export class AccountService {
   private allservers: serverType[]=[];
-  constructor() {
-    this.allservers = [{name:'cico', type:'bull', content: 'strip'}];
+  constructor(private logservice : LoggingService) {
+    this.allservers = [{name:'cicozz', type:'bull', content: 'strip'}];
   }
 
   addServer(newserver: serverType){
     this.allservers.push(newserver);
+    this.logservice.logStatusChanged("new server was added");
   }
   deleteServer(){
     this.allservers.pop();
+    this.logservice.logStatusChanged("server was deleted");
   }
   getServers(): serverType[] {
     return this.allservers;

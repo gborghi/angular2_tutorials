@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ServerComponent } from './server/server.component';
-import { ServersComponent } from './servers/servers.component';
-import { BasicHighlightDirective } from './servers/basic-highlight/basic-highlight.directive';
-import { BetterHighlightDirective } from './servers/better-highlight/better-highlight.directive';
-import { UnlessDirective } from './unless.directive';
+import { ServerComponent } from './components/server/server.component';
+import { ServersComponent } from './components/servers/servers.component';
+import { BasicHighlightDirective } from './directives/basic-highlight/basic-highlight.directive';
+import { BetterHighlightDirective } from './directives/better-highlight/better-highlight.directive';
+import { UnlessDirective } from './directives/unless/unless.directive';
+import { AccountService } from './services/account/account.service';
+import { LoggingService } from './services/logging/logging.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { UnlessDirective } from './unless.directive';
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AccountService, LoggingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

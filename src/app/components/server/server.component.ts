@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, ContentChild } from '@angular/core';
-import { serverType } from '../account.service';
+import { serverType } from '../../services/account/account.service';
 
 @Component({
   selector: 'app-server',
@@ -10,7 +10,6 @@ import { serverType } from '../account.service';
     }'
   `]
 })
-
 export class ServerComponent implements OnInit, AfterViewInit {
   @Input() element: serverType;
   //@Input() element: string;
