@@ -10,3 +10,15 @@ export class DropdownDirective {
     this.isOpen = !this.isOpen;
   }
 }
+
+@Directive({
+  selector: '[appCollapse]'
+})
+
+export class CollapseDirective {
+  @HostBinding('class.collapse') iscollapsed = true;
+  @HostListener('click') toggleOpen() {
+    console.log('clicked');
+    this.iscollapsed = !this.iscollapsed;
+  }
+}
