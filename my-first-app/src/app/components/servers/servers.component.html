@@ -1,0 +1,27 @@
+<p>The server component</p>
+<input type="text" [(ngModel)]="serverName">
+<input type="text" #servercontent>
+<input [appBetterHighlight]="'yellow'" type="text" #servertype>
+<p appBasicHighlight >Server with ID {{serverName}} is {{getServerNumber()}} </p>
+<p>{{ serverName }}</p>
+
+<button type="button" class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer(servercontent)">Ciccione</button>
+<button class="btn btn-primary" (click)="onDeleteServer()">Delete server</button>
+<p *ngIf="serverCreated; else noServer">{{ serverCreationStatus }}</p>
+<ng-template #noServer>
+  <p>
+    Nessun server creato
+  </p>
+</ng-template>
+<input type="text" class="form-control" (keydown)="$event.keyCode === 37 ? onUpdateServerName($event) : pass">
+
+<!--
+<app-server [parameter]="servers[0].name"></app-server>
+<app-server [parameter]="servers[1].name"></app-server>
+-->
+<ng-template ngFor let-server [ngForOf]="localservers">
+  <app-server *appUnless="server.name.length > 5" [element]="server" [servernumber]="serverNumber">
+    You broke {{server.type}} balls with
+    <p #pistick></p> strength.
+  </app-server>
+</ng-template>
