@@ -16,7 +16,8 @@ import { PicturesComponent } from './pictures/pictures.component';
 
 const appRoutes : Routes = [
   { path: 'pictures', component: PicturesComponent },
-  { path: 'servers', component: ServersComponent }
+  { path: 'servers', component: ServersComponent },
+  { path: 'server', component: ServerComponent }
 ]
 
 @NgModule({
