@@ -1,4 +1,4 @@
-import { Inject, Component, OnInit, ViewChild, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { serverType, AccountService } from '../../services/account/account.service';
 //import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
 

@@ -22,7 +22,7 @@ export class BetterHighlightDirective implements OnInit {
   @HostBinding('style.color') textColor: string = "black";
   @HostBinding('class.nopen') notOpen: boolean = false;
 
-  @HostListener('mouseover') mousover(eventData: Event){
+  @HostListener('mouseover') mousover(){
         this.renderer.setStyle(this.elref.nativeElement, 'background-color',this.highlightColor);
         if(this.howmany>3){
           this.textColor=this.textHighlightColor;
@@ -33,7 +33,7 @@ export class BetterHighlightDirective implements OnInit {
         console.log(this.howmany);
         this.howmany=this.howmany+1;
   }
-  @HostListener('mouseleave') mousout(eventData: Event){
+  @HostListener('mouseleave') mousout(){
         this.renderer.setStyle(this.elref.nativeElement, 'background-color','transparent');
   }
 }
