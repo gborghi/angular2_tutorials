@@ -11,6 +11,13 @@ import { BetterHighlightDirective } from './directives/better-highlight/better-h
 import { UnlessDirective } from './directives/unless/unless.directive';
 import { AccountService } from './services/account/account.service';
 import { LoggingService } from './services/logging/logging.service';
+import { Routes, RouterModule } from '@angular/router';
+import { PicturesComponent } from './pictures/pictures.component';
+
+const appRoutes : Routes = [
+  { path: 'pictures', component: PicturesComponent },
+  { path: 'servers', component: ServersComponent }
+]
 
 @NgModule({
   declarations: [
@@ -20,11 +27,13 @@ import { LoggingService } from './services/logging/logging.service';
     BasicHighlightDirective,
     BetterHighlightDirective,
     UnlessDirective,
+    PicturesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [AccountService, LoggingService],
   bootstrap: [AppComponent]
