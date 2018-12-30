@@ -10,7 +10,6 @@ import { AidClass } from '../shared/aid.module'
 })
 export class HeaderComponent {
   @Output() featureSelected = new EventEmitter<string>();
-  //@ViewChild('toclick') elref;
 
   constructor(private toggler: AidClass){}
 
