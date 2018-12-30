@@ -1,22 +1,25 @@
-import { ViewChild, ElementRef, Component, EventEmitter, Output } from '@angular/core';
+import { Renderer2, ViewChild, ElementRef, Component, EventEmitter, Output } from '@angular/core';
 import { CollapseDirective } from '../shared/dropdown.directive'
+import { AidClass } from '../shared/aid.module'
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  styles: ['.redback {background-color: red}'],
+  providers: [AidClass]
 })
 export class HeaderComponent {
   @Output() featureSelected = new EventEmitter<string>();
-  @ViewChild('toclick') elref;
+  //@ViewChild('toclick') elref;
+
+  constructor(private toggler: AidClass){}
 
   onSelect(feature: string) {
     this.featureSelected.emit(feature);
   }
 
-  toChildClick(elref){
-    //console.log(elref.constructor.name);
-    this.elref.nativeElement.click();
-    //console.log(elref);
+  toChildClick(elref : HTMLElement){
+    elref.dispatchEvent(new CustomEvent('click'));
   }
 
 }
