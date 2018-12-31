@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, Data } from '@angular/router';
 
 @Component({
   selector: 'app-server',
@@ -27,20 +27,28 @@ export class ServerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    const id = +this.route.snapshot.params['id'];
-    this.canedit = +this.route.snapshot.queryParams['allowEdit']===1? true:false;
-    this.server = this.serversService.getServer(id);
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.server = this.serversService.getServer(+params['id']);
-      }
-    );
-    this.route.queryParams.subscribe(
-      (params: Params) => {
-        this.canedit = +params['allowEdit']===1 ? true : false;
+    this.route.data.subscribe(
+      (data: Data) => {
+        this.server = data['return'].server;
+        this.canedit = +data['return'].edit===1 ? true : false;
+  //      this.canedit = +data['allowEdit']===1 ? true : false;
         this.updateEditButton();
       }
     );
+    // const id = +this.route.snapshot.params['id'];
+    // this.canedit = +this.route.snapshot.queryParams['allowEdit']===1? true:false;
+    // this.server = this.serversService.getServer(id);
+    // this.route.params.subscribe(
+    //   (params: Params) => {
+    //     this.server = this.serversService.getServer(+params['id']);
+    //   }
+    // );
+    // this.route.queryParams.subscribe(
+    //   (params: Params) => {
+    //     this.canedit = +params['allowEdit']===1 ? true : false;
+    //     this.updateEditButton();
+    //   }
+    // );
   }
 
   onEdit(){

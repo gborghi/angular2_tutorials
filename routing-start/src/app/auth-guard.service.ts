@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.authService.isAuthenticated().then(
       (authenticated:boolean)=> {
         if(authenticated){
-          alert("successfully authenticated");
+          //alert("successfully authenticated");
           return true;
         }
         else{
